@@ -21,3 +21,5 @@ with sync_playwright() as playwright:
 
     registration_button = page.get_by_test_id('registration-page-registration-button')
     expect(registration_button).not_to_be_disabled()
+
+    page.wait_for_timeout(5000)

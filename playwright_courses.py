@@ -32,13 +32,13 @@ with sync_playwright() as playwright:
     expect(courses_title).to_be_visible()
     expect(courses_title).to_have_text('Courses')
 
-    icon_block = page.get_by_test_id('courses-list-empty-view-icon')
-    expect(icon_block).to_be_visible()
+    empty_view_icon = page.get_by_test_id('courses-list-empty-view-icon')
+    expect(empty_view_icon).to_be_visible()
 
-    two_text = page.get_by_test_id('courses-list-empty-view-title-text')
-    expect(two_text).to_be_visible()
-    expect(two_text).to_have_text('There is no results')
+    empty_view_title = page.get_by_test_id('courses-list-empty-view-title-text')
+    expect(empty_view_title).to_be_visible()
+    expect(empty_view_title).to_have_text('There is no results')
 
-    block_text = page.get_by_test_id('courses-list-empty-view-description-text')
-    expect(block_text).to_be_visible()
-    expect(block_text).to_have_text('Results from the load test pipeline will be displayed here')
+    empty_view_description = page.get_by_test_id('courses-list-empty-view-description-text')
+    expect(empty_view_description).to_be_visible()
+    expect(empty_view_description).to_have_text('Results from the load test pipeline will be displayed here')

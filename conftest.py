@@ -27,7 +27,6 @@ def initialize_browser_state(playwright: Playwright):
 
     registration_button = page.get_by_test_id('registration-page-registration-button')
     registration_button.click()
-    page.wait_for_url("**/dashboard", timeout=5000)
     context.storage_state(path="browser-state.json")
     browser.close()
 

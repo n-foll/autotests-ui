@@ -1,5 +1,6 @@
-import pytest  # Импортируем pytest
-from playwright.sync_api import Page, Playwright  # Имопртируем класс страницы, будем использовать его для аннотации типов
+import pytest
+from playwright.sync_api import Playwright, Page
+
 
 @pytest.fixture
 def chromium_page(playwright: Playwright) -> Page:
@@ -27,16 +28,14 @@ def initialize_browser_state(playwright: Playwright):
 
     registration_button = page.get_by_test_id('registration-page-registration-button')
     registration_button.click()
-    context.storage_state(path="../browser-state.json")
+
+    context.storage_state(path="browser-state.json")
     browser.close()
 
 
-@pytest.fixture  # Объявляем фикстуру, по умолчанию скоуп function, то что нам нужно
-def chromium_page_with_state(initialize_browser_state, playwright: Playwright) -> Page:  # Аннотируем возвращаемое фикстурой значение
-    # Запускаем браузер
+@pytest.fixture
+def chromium_page_with_state(initialize_browser_state, playwright: Playwright) -> Page:
     browser = playwright.chromium.launch(headless=False)
     context = browser.new_context(storage_state="browser-state.json")
-    page = context.new_page()
-    yield page
-    # Закрываем браузер после выполнения тестов
+    yield context.new_page()
     browser.close()

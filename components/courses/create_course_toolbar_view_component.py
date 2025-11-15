@@ -1,4 +1,3 @@
-import re
 from components.base_component import BaseComponent,expect
 
 

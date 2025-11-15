@@ -3,6 +3,7 @@ import pytest  # Импортируем библиотеку pytest
 from pages.login_page import LoginPage  # Импортируем LoginPage
 
 
+
 @pytest.mark.regression  # Добавили маркировку regression
 @pytest.mark.authorization  # Добавили маркировку authorization
 @pytest.mark.parametrize("email, password", [
@@ -12,6 +13,6 @@ from pages.login_page import LoginPage  # Импортируем LoginPage
 ])
 def test_wrong_email_or_password_authorization(login_page: LoginPage,  email: str, password: str):
     login_page.visit("https://nikita-filonov.github.io/qa-automation-engineer-ui-course/#/auth/login")
-    login_page.fill_login_form(email=email, password=password) # Заполняем форму авторизации
+    login_page.login_form.fill_login(email=email, password=password) # Заполняем форму авторизации, при помощи login_form.fill_login из файла login_form_component
     login_page.click_login_button() # Нажимаем кнопку "Login"
     login_page.check_visible_wrong_email_or_password_alert() # Проверяем наличие сообщения об ошибке

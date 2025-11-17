@@ -55,7 +55,7 @@ class TestCourses:
         create_course_page.create_course_toolbar.click_create_course_button()
 
         courses_list_page.toolbar_view.check_visible()
-        courses_list_page.course_view.check_visible(
+        courses_list_page.course_view.check_have_text(
             index=0, title="1 test", max_score="100", min_score="10", estimated_time="1 weeks"
         )
         courses_list_page.course_view_menu_component.click_edit(index=0)
@@ -69,7 +69,7 @@ class TestCourses:
         create_course_page.create_course_toolbar.click_create_course_button()
 
         courses_list_page.toolbar_view.check_visible()
-        courses_list_page.course_view.check_visible(
+        courses_list_page.course_view.check_have_text(
             index=0, title="Update", max_score="90", min_score="5", estimated_time="2 weeks"
         )
 

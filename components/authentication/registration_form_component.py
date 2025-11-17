@@ -1,13 +1,15 @@
-from playwright.sync_api import Page,expect
+from playwright.sync_api import Page
 from components.base_component import BaseComponent
+from elements.input import Input
+
 
 class RegistrationFormComponent(BaseComponent):
     def __init__(self, page:Page):
         super().__init__(page)
 
-        self.email = page.get_by_test_id('registration-form-email-input').locator('Input')
-        self.username = page.get_by_test_id('registration-form-username-input').locator('input')
-        self.password = page.get_by_test_id('registration-form-password-input').locator('input')
+        self.email = Input(page, 'registration-form-email-input', 'Email')
+        self.username = Input(page, 'registration-form-username-input', 'Username')
+        self.password = Input(page, 'registration-form-password-input', 'Password')
 
     def fill_registration(self,
         email = "user.name@gmail.com",
@@ -15,10 +17,10 @@ class RegistrationFormComponent(BaseComponent):
         password = "password"
         ):
         self.email.fill(email)
-        expect(self.email).to_have_value(email)
+        self.email.check_have_value(email)
 
         self.username.fill(username)
-        expect(self.username).to_have_value(username)
+        self.username.check_have_value(username)
 
         self.password.fill(password)
-        expect(self.password).to_have_value(password)
+        self.password.check_have_value(password)

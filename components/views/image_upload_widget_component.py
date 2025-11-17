@@ -42,11 +42,11 @@ class ImageUploadWidgetComponent(BaseComponent):
         self.image_upload_info_description.check_visible()
         self.image_upload_info_description.check_have_text('Recommended file size 540X300')
 
-        self.upload_button.check_enabled()
+        self.upload_button.check_visible()
 
         if is_image_uploaded:
             # Если картинка загружена, проверяем состояние специфичное для загруженной картинки
-            self.remove_button.check_enabled()
+            self.remove_button.check_visible()
             self.preview_image.check_visible()
 
         if not is_image_uploaded:

@@ -1,6 +1,6 @@
 import allure
 from playwright.sync_api import Playwright, Page
-from config1 import settings
+from config import settings
 
 
 def initialize_playwright_page(

@@ -2,7 +2,6 @@ import pytest
 import allure
 from allure_commons.types import Severity
 
-from config import settings
 from pages.courses.courses_list_page import CoursesListPage
 from pages.courses.create_course_page import CreateCoursePage
 from tools.allure.tags import AllureTag
@@ -23,7 +22,7 @@ class TestCourses:
     @allure.title("Check displaying of empty courses list")
     @allure.severity(Severity.NORMAL)  # Добавили severity
     def test_empty_courses_list(self, courses_list_page: CoursesListPage):
-        courses_list_page.visit("./#/courses")
+        courses_list_page.visit("https://nikita-filonov.github.io/qa-automation-engineer-ui-course/#/courses")
         courses_list_page.navbar.check_visible('username')
         courses_list_page.sidebar.check_visible()
         courses_list_page.toolbar_view.check_visible()
@@ -32,7 +31,7 @@ class TestCourses:
     @allure.title("Create course")
     @allure.severity(Severity.CRITICAL)  # Добавили severity
     def test_create_course(self, courses_list_page: CoursesListPage, create_course_page: CreateCoursePage):
-        create_course_page.visit("./#/courses/create")
+        create_course_page.visit("https://nikita-filonov.github.io/qa-automation-engineer-ui-course/#/courses/create")
         create_course_page.create_course_toolbar.check_visible()
         create_course_page.image_upload_widget.check_visible(is_image_uploaded=False)
         create_course_page.create_course_form.check_visible_create_course(
@@ -61,8 +60,8 @@ class TestCourses:
     @allure.title("Edit course")
     @allure.severity(Severity.CRITICAL)  # Добавили severity
     def test_edit_course(self, courses_list_page: CoursesListPage, create_course_page: CreateCoursePage):
-        create_course_page.visit("./#/courses/create")
-        create_course_page.image_upload_widget.upload_preview_image(settings.test_data.image_png_file)
+        create_course_page.visit("https://nikita-filonov.github.io/qa-automation-engineer-ui-course/#/courses/create")
+        create_course_page.image_upload_widget.upload_preview_image('./testdata/files/image.png')
         create_course_page.image_upload_widget.check_visible(is_image_uploaded=True)
         create_course_page.create_course_form.fill_create_course(
             title="1 test",
@@ -91,4 +90,3 @@ class TestCourses:
         courses_list_page.course_view.check_visible(
             index=0, title="Update", max_score="90", min_score="5", estimated_time="2 weeks"
         )
-

@@ -10,7 +10,7 @@ from pages.dashboard.dashboard_page import DashboardPage
 from tools.allure.epics import AllureEpic # Импортируем enum AllureEpic
 from tools.allure.features import AllureFeature # Импортируем enum
 from tools.allure.stories import AllureStory # Импортируем enum AllureStory
-from config1 import settings
+from config import settings
 
 
 

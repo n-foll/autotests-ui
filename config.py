@@ -1,4 +1,4 @@
-# config1.py
+# config.py
 from enum import Enum
 from typing import Self
 

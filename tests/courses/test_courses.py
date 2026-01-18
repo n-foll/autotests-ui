@@ -3,7 +3,7 @@ import allure
 from allure_commons.types import Severity
 
 
-from config import settings
+from config1 import settings
 from pages.courses.courses_list_page import CoursesListPage
 from pages.courses.create_course_page import CreateCoursePage
 from tools.allure.tags import AllureTag

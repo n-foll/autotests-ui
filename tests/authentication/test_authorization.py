@@ -9,6 +9,7 @@ from pages.dashboard.dashboard_page import DashboardPage
 from tools.allure.epics import AllureEpic # Импортируем enum AllureEpic
 from tools.allure.features import AllureFeature # Импортируем enum
 from tools.allure.stories import AllureStory # Импортируем enum AllureStory
+from config import settings
 
 
 @pytest.mark.regression
@@ -32,7 +33,7 @@ class TestAuthorization:
     @allure.title("User login with wrong email or password")
     @allure.severity(Severity.CRITICAL)  # Добавили severity
     def test_wrong_email_or_password_authorization(self, login_page: LoginPage, email: str, password: str):
-        login_page.visit("https://nikita-filonov.github.io/qa-automation-engineer-ui-course/#/auth/login")
+        login_page.visit("./#/auth/login")
         login_page.login_form.fill(email=email, password=password)
         login_page.click_login_button()
         login_page.check_visible_wrong_email_or_password_alert()
@@ -47,9 +48,13 @@ class TestAuthorization:
             registration_page: RegistrationPage
     ):
         #Переход на страницу регистрации
-        registration_page.visit("https://nikita-filonov.github.io/qa-automation-engineer-ui-course/#/auth/registration")
+        registration_page.visit("./#/auth/registration")
         # Заполнение формы регистрации и нажатие кнопки "Registration"
-        registration_page.registration_form.fill(email="user.name@gmail.com", username="username", password="password")
+        registration_page.registration_form.fill(
+            email=settings.test_user.email,
+            username=settings.test_user.username,
+            password=settings.test_user.password,
+        )
         registration_page.click_registration_button()
 
         # Проверка видимости элементов Dashboard
@@ -60,7 +65,10 @@ class TestAuthorization:
         dashboard_page.sidebar.click_logout()
 
         # Переход на страницу авторизации и авторизация
-        login_page.login_form.fill(email="user.name@gmail.com", password="password")
+        login_page.login_form.fill(
+            email=settings.test_user.email,
+            password=settings.test_user.password,
+        )
         login_page.click_login_button()
 
         # Проверка элементов Dashboard после входа
@@ -76,7 +84,7 @@ class TestAuthorization:
             login_page: LoginPage,
             registration_page: RegistrationPage
     ):
-        login_page.visit("https://nikita-filonov.github.io/qa-automation-engineer-ui-course/#/auth/login")
+        login_page.visit("./#/auth/login")
         login_page.click_registration_link()
 
         registration_page.registration_form.check_visible(email="", username="", password="")

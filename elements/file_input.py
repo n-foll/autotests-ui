@@ -1,5 +1,8 @@
 from elements.base_element import BaseElement
 import allure
+from tools.logger import get_logger
+
+logger = get_logger("File_INPUT")
 
 class FileInput(BaseElement):
     @property
@@ -9,6 +12,8 @@ class FileInput(BaseElement):
 
 
     def set_input_files(self, file: str,nth:int = 0, **kwargs):
+        step = f'Set file "{file}" to the {self.type_of} "{self.name}"'
         with allure.step(f'Set file "{file}" to the {self.type_of} "{self.name}"'):
             locator = self.get_locator(nth, **kwargs)
+            logger.info(step)
             locator.set_input_files(file)

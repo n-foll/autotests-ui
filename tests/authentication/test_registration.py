@@ -24,6 +24,7 @@ from config import settings
 @allure.parent_suite(AllureEpic.LMS)
 class TestRegistration:
    @allure.title("Registration with correct email, username and password")
+   @pytest.mark.xdist_group(name="authorization-group")  # Добавили xdist группу
    @allure.severity(Severity.CRITICAL)  # Добавили severity
    def test_successful_registration(self, dashboard_page: DashboardPage, registration_page: RegistrationPage):
        registration_page.visit("./#/auth/registration")
